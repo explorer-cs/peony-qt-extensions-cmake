@@ -1,7 +1,7 @@
 #ifndef ADMINMENUPLUGIN_H
 #define ADMINMENUPLUGIN_H
 
-#include "menu-plugin-iface.h"
+#include <menu-plugin-iface.h>
 
 #include <QObject>
 
