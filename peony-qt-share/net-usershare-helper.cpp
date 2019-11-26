@@ -88,6 +88,7 @@ bool NetUsershareHelper::updateShareInfo(ShareInfo &info)
 
 void NetUsershareHelper::removeShared(const QString &item)
 {
+    Peony::SharePropertiesPagePlugin::getInstance()->removeShareInfo(item);
     QProcess p;
     p.start("net", QStringList()<<"usershare"<<"delete"<<item);
     p.waitForFinished();

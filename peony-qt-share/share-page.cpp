@@ -43,13 +43,13 @@ SharePage::SharePage(const QString &uri, QWidget *parent) : QWidget(parent)
 
     QFrame *s = new QFrame(this);
     s->setFrameShape(QFrame::HLine);
-    layout->addWidget(s);
+    layout->addRow(s, s);
 
     bool shared = m_share_info.isShared;
 
     QCheckBox *shareCheckBox = new QCheckBox(tr("Share folder"), this);
     shareCheckBox->setChecked(m_share_info.isShared);
-    layout->addRow(tr("Share"), shareCheckBox);
+    layout->addRow(tr("Share:"), shareCheckBox);
 
     s = new QFrame(this);
     s->setFrameShape(QFrame::HLine);
@@ -70,7 +70,11 @@ SharePage::SharePage(const QString &uri, QWidget *parent) : QWidget(parent)
 
     QTextEdit *edit = new QTextEdit(this);
     edit->setText(m_share_info.comment);
-    layout->addRow(tr("Comment:"), edit);
+    QLabel *comment = new QLabel(tr("Comment:"), this);
+    layout->addRow(comment, edit);
+
+    comment->setVisible(shared);
+    edit->setVisible(shared);
 
     connect(edit, &QTextEdit::textChanged, this, [=](){
         m_share_info.comment = edit->toPlainText();
@@ -90,6 +94,8 @@ SharePage::SharePage(const QString &uri, QWidget *parent) : QWidget(parent)
             shareReadOnlyCheckBox->setVisible(m_share_info.isShared);
             shareAllowGuestCheckBox->setVisible(m_share_info.isShared);
             s->setVisible(m_share_info.isShared);
+            comment->setVisible(m_share_info.isShared);
+            edit->setVisible(m_share_info.isShared);
 
             if (m_share_info.isShared) {
                 /*!
@@ -102,6 +108,8 @@ SharePage::SharePage(const QString &uri, QWidget *parent) : QWidget(parent)
             s->setVisible(false);
             shareReadOnlyCheckBox->setVisible(false);
             shareAllowGuestCheckBox->setVisible(false);
+            comment->setVisible(false);
+            edit->setVisible(false);
 
             NetUsershareHelper::removeShared(m_share_info.name);
             m_share_info.isShared = false;
