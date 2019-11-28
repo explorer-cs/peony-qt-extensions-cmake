@@ -2,6 +2,7 @@
 #include "share-page.h"
 
 #include <PeonyFileInfo>
+#include <PeonyFileInfoJob>
 
 #include <QLabel>
 
@@ -58,7 +59,11 @@ bool SharePropertiesPagePlugin::supportUris(const QStringList &uris)
         return false;
     }
     auto info = FileInfo::fromUri(uris.first());
-    if (!info->isDir()) {
+    if (info->displayName().isNull()) {
+        FileInfoJob j(info);
+        j.querySync();
+    }
+    if (!info->isDir() || info->isVirtual() || !info->uri().startsWith("file:///")) {
         return false;
     }
     return true;
