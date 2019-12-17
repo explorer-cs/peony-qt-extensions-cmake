@@ -6,9 +6,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt5 COMPONENTS Core Gui Widgets Concurrent REQUIRED)
-find_package(PkgConfig)
+find_package(PkgConfig REQUIRED)
 
-pkg_search_module(PEONY_QT REQUIRED peony-qt)
+pkg_check_modules(PEONY_QT REQUIRED peony-qt)
 message(${PEONY_QT_INCLUDE_DIRS})
 message(${PEONY_QT_LIBRARIES})
 
