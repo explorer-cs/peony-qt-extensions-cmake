@@ -23,7 +23,11 @@ configure_file(org.freedesktop.peony-qt-admin.policy.in
 
 include_directories(${PEONY_QT_INCLUDE_DIRS})
 
-add_library(${PROJECT_NAME} SHARED "admin-menu-plugin.cpp")
+file(GLOB_RECURSE QRC_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.qrc)
+set(QRC_SOURCE_FILES resources.qrc)
+qt5_add_resources(QRC_FILES ${QRC_SOURCE_FILES})
+
+add_library(${PROJECT_NAME} SHARED "admin-menu-plugin.cpp" ${QRC_FILES})
 
 target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Concurrent ${PEONY_QT_LIBRARIES})
 

@@ -23,8 +23,8 @@ public:
     void removeShareInfo(const QString &item);
 
     PluginInterface::PluginType pluginType() override {return PluginInterface::PropertiesWindowPlugin;}
-    const QString name() override {return "Peony Qt Share Extension";}
-    const QString description() override {return "Allow user share folders";}
+    const QString name() override {return tr("Peony Qt Share Extension");}
+    const QString description() override {return tr("Allow user share folders");}
     const QIcon icon() override {return QIcon::fromTheme("emblem-shared");}
     void setEnable(bool enable) override {m_enable = enable;}
     bool isEnable() override {return m_enable;}

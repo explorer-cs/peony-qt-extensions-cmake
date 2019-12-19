@@ -5,6 +5,9 @@
 #include <PeonyFileInfoJob>
 
 #include <QLabel>
+#include <QTranslator>
+#include <QApplication>
+#include <QFile>
 
 #include <QDebug>
 
@@ -20,6 +23,12 @@ SharePropertiesPagePlugin *SharePropertiesPagePlugin::getInstance()
 SharePropertiesPagePlugin::SharePropertiesPagePlugin(QObject *parent) : QObject(parent)
 {
     qDebug()<<"init";
+    QTranslator *t = new QTranslator(this);
+    qDebug()<<"\n\n\n\n\n\n\n SharePropertiesPagePlugin translate:"<<t->load(":/translations/peony-qt-share-extension_"+QLocale::system().name());
+    QFile file(":/translations/peony-qt-share-extension_"+QLocale::system().name()+".ts");
+    qDebug()<<"file:"<<file.exists();
+    QApplication::installTranslator(t);
+
     auto items = NetUsershareHelper::getSharedItems();
     for (auto item : items) {
         auto shareInfo = ShareInfo(item, true);

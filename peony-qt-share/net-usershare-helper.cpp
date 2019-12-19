@@ -69,7 +69,7 @@ bool NetUsershareHelper::updateShareInfo(ShareInfo &info)
     QStringList args;
     args<<info.name;
     args<<info.originalPath;
-    args<<(info.comment.isNull()?"Peony-Qt-Share-Extension" : info.comment);
+    args<<(info.comment.isNull()? "Peony-Qt-Share-Extension" : info.comment);
     //args<<(info.readOnly? QString("EveryOne:R")/*.arg(g_get_user_name())*/: "EveryOne:F");
     args<<(info.readOnly? "Everyone:R": "Everyone:F");
     args<<(info.allowGuest? "guest_ok=y": "guest_ok=n");

@@ -4,6 +4,9 @@
 #include <QProcess>
 #include <QtConcurrent>
 #include <QUrl>
+#include <QTranslator>
+#include <QApplication>
+#include <QFile>
 
 #include <QDebug>
 
@@ -11,7 +14,13 @@ using namespace Peony;
 
 AdminMenuPlugin::AdminMenuPlugin(QObject *parent) : QObject(parent)
 {
+    QTranslator *t = new QTranslator(this);
 
+    bool b_load = t->load(":/translations/peony-qt-admin-extension_"+QLocale::system().name());
+    qDebug()<<"\n\n\n\n\n\n\n  AdminMenuPlugin translate:"<<b_load;
+    QFile file(":/translations/peony-qt-admin-extension_"+QLocale::system().name()+".ts");
+    qDebug()<<"file:"<<file.exists();
+    QApplication::installTranslator(t);
 }
 
 QList<QAction *> AdminMenuPlugin::menuActions(Types types, const QString &uri, const QStringList &selectionUris)
