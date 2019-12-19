@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.1.0)
 
 project(peony-qt-share VERSION 0.1 LANGUAGES CXX)
 
@@ -7,9 +7,9 @@ set(CMAKE_AUTOMOC ON)
 set(PROJECTNAME peony-qt-admin)
 
 find_package(Qt5 COMPONENTS Core Gui Widgets Concurrent REQUIRED)
-find_package(PkgConfig)
+find_package(PkgConfig REQUIRED)
 
-pkg_search_module(PEONY_QT REQUIRED peony-qt)
+pkg_check_modules(PEONY_QT REQUIRED peony-qt)
 message(${PEONY_QT_INCLUDE_DIRS})
 message(${PEONY_QT_LIBRARIES})
 
