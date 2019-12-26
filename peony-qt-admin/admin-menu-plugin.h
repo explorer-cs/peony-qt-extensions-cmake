@@ -39,7 +39,7 @@ public:
 
     PluginInterface::PluginType pluginType() override {return PluginInterface::MenuPlugin;}
     const QString name() override {return "Peony Qt Admin Extension";}
-    const QString description() override {return "Allow user lauch file/directory as admin";}
+    const QString description() override {return "Allow user launch file/directory as admin";}
     const QIcon icon() override {return QIcon::fromTheme("system-users-symbolic");}
     void setEnable(bool enable) override {m_enable = enable;}
     bool isEnable() override {return m_enable;}
